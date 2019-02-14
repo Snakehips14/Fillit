@@ -6,7 +6,7 @@
 #    By: behiraux <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 14:04:26 by behiraux          #+#    #+#              #
-#    Updated: 2018/12/03 17:17:36 by behiraux         ###   ########.fr        #
+#    Updated: 2019/02/14 16:35:02 by behiraux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ INCLUDE = libft.h
 SRC = ft_abs.c\
 	  ft_atoi.c\
 	  ft_bzero.c\
+	  ft_deltab.c\
 	  ft_idxof.c\
 	  ft_is_separator.c\
 	  ft_isalnum.c\

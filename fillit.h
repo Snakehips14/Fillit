@@ -6,7 +6,7 @@
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 14:49:31 by behiraux          #+#    #+#             */
-/*   Updated: 2019/02/07 17:22:08 by behiraux         ###   ########.fr       */
+/*   Updated: 2019/02/14 17:43:34 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ char	**ft_build_tetri(char *str);
 char	*ft_tetri(char *str, int pos);
 int		*ft_pos_tab(char **tetri, int indice);
 int		ft_check_shape(int *t);
-int		ft_check_all_3(char **tetri, char *str, int nb_t);
-
+int		ft_check_all_3(char **tetri, int nb_t);
+char	**ft_map(int nb_t);
+int		ft_sqrtmap(int nb_t);
+int		ft_compare(char *tetri);
+int		ft_pos_max_left(char *tetri);
+char	*ft_tetri_2d(char *tetri, int pos, int j);
+char	*ft_tetri_letter(char *tetri_2d, char c);
+char    **ft_parse(char **tetri, int nb_t);
 #endif

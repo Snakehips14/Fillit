@@ -6,7 +6,7 @@
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:29:24 by behiraux          #+#    #+#             */
-/*   Updated: 2019/02/07 17:24:41 by behiraux         ###   ########.fr       */
+/*   Updated: 2019/02/13 16:34:20 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ char	*ft_give_input(char *input)
 	fd = open(input, O_RDONLY);
 	i = 0;
 	len = ft_input_len(input);
-	new = ft_strnew(len);
 	if (len == -1)
 		return (NULL);
+	new = ft_strnew(len);
 	while (read(fd, &buf, 1) != '\0')
 	{
 		new[i] = buf;

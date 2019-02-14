@@ -6,7 +6,7 @@
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 15:18:18 by behiraux          #+#    #+#             */
-/*   Updated: 2019/02/07 17:51:35 by behiraux         ###   ########.fr       */
+/*   Updated: 2019/02/13 16:40:51 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,57 +17,67 @@ int	ft_check_input(char *input, int pos)
 	int		x;
 	char	*str;
 	int		len;
+	int		i;
 
 	str = ft_strdup(input);
 	len = ft_strlen(str);
-	x = pos + 20;
-	if (x > len)
-		x = len;
-	while (pos <= x)
+	i = 0;
+	while (i < len)
 	{
-		if ((pos == x || pos == (x - 1) || pos == (x - 6) ||
-				pos == (x - 11) || pos == (x - 16)) && str[pos] != '\n')
+		x = pos + 20;
+		if (x > len)
+			x = len;
+		while (pos <= x)
 		{
-			printf("fail a pos %d\n", pos);
-			ft_strdel(&str);
-			return (0);
+			if (i == len && str[i] == '\0')
+				return (1);
+			if ((pos == x || pos == (x - 1) || pos == (x - 6) ||
+					pos == (x - 11) || pos == (x - 16)) && str[i] != '\n')
+			{
+				printf("i = %d len = %d et gros fail a pos %d\n", i, len, pos);
+				ft_strdel(&str);
+				return (0);
+			}
+			i++;
+			pos++;
 		}
-		if (str[pos] == '\n' && str[pos + 1] == '\0' && pos == len - 1)
-		{
-			ft_strdel(&str);
-			return (1);
-		}
-		pos++;
+		pos = 0;
 	}
-	ft_check_input(str, pos);
 	return (1);
 }
 
 int	ft_check_tetri(char *input, int pos)
 {
+	char	*str;
 	int		diese;
 	int		x;
 	int		len;
+	int		i;
 
-	diese = 0;
-	len = ft_strlen(input);
-	x = pos + 20;
-	if (x > len)
-		x = len;
-	while (pos <= x)
+	str = ft_strdup(input);
+	i = 0;
+	len = ft_strlen(str);
+	while (i < len)
 	{
-		if (input[pos] == '#')
-			diese++;
-		pos++;
+		diese = 0;
+		x = pos + 20;
+		if (x > len)
+			x = len;
+		while (pos <= x)
+		{
+			if (input[i] == '#')
+				diese++;
+			pos++;
+			i++;
+		}
+		if (diese != 4)
+		{
+			printf("diese = %d, i = %d fail 2 a pos %d\n", diese, i, pos);
+			ft_strdel(&str);
+			return (0);
+		}
+		pos = 0;
 	}
-	if (diese != 4)
-	{
-		printf("fail 2 a pos %d\n", pos);
-		return (0);
-	}
-	if (pos == len + 1)
-		return (1);
-	ft_check_tetri(input, pos);
 	return (1);
 }
 

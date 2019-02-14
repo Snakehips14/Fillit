@@ -6,7 +6,7 @@
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 12:31:23 by behiraux          #+#    #+#             */
-/*   Updated: 2018/12/05 15:38:20 by behiraux         ###   ########.fr       */
+/*   Updated: 2019/02/14 16:34:23 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef	struct		s_list
 int					ft_abs(int nb);
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
-int					ft_idxof(const char *s, int c);
+void				ft_deltab(char **tab);
+int					ft_idxof(const char *s, char c);
 int					ft_is_separator(char c);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);

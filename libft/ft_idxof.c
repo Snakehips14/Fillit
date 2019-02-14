@@ -6,13 +6,13 @@
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 14:42:16 by behiraux          #+#    #+#             */
-/*   Updated: 2018/12/03 15:07:48 by behiraux         ###   ########.fr       */
+/*   Updated: 2019/02/13 16:12:29 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_idxof(const char *s, int c)
+int	ft_idxof(const char *s, char c)
 {
 	int i;
 	int j;
@@ -23,7 +23,7 @@ int	ft_idxof(const char *s, int c)
 		j++;
 	while (i <= j)
 	{
-		if (s[i] == (char)c)
+		if (s[i] == c)
 			return (i);
 		i++;
 	}

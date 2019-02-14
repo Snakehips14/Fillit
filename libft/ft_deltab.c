@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   ft_deltab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/19 12:04:05 by behiraux          #+#    #+#             */
-/*   Updated: 2019/02/14 16:27:22 by behiraux         ###   ########.fr       */
+/*   Created: 2019/02/14 16:24:58 by behiraux          #+#    #+#             */
+/*   Updated: 2019/02/14 18:02:38 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft.h" 
 
-void	ft_strdel(char **as)
+void	ft_deltab(char **tab)
 {
-	if (as && *as)
+	int i;
+
+	if (!tab)
+		return ;
+	i = 0;
+	while (tab[i] != 0)
 	{
-		free(*as);
-		*as = NULL;
+		free(tab[i]);
+		i++;
 	}
+	free (tab);
 }

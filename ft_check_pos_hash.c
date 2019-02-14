@@ -6,7 +6,7 @@
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:01:41 by behiraux          #+#    #+#             */
-/*   Updated: 2019/02/07 17:24:52 by behiraux         ###   ########.fr       */
+/*   Updated: 2019/02/14 16:45:39 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,21 @@ int		ft_check_shape(int *t)
 	return (0);
 }
 
-int		ft_check_all_3(char **tetri, char *str, int nb_t)
+int		ft_check_all_3(char **tetri, int nb_t)
 {
-	int		indice;
 	int		tab[4];
 	int		ret;
-	int 	i;
-	int 	j;
-	int 	k;
+	int		i;
+	int		j;
+	int		k;
 
-	printf("str=\n%s", str);
 	printf("nb_t = %d\n", nb_t);
 	j = 0;
 	while (j < nb_t)
 	{
-		printf("ha ");
 		i = 0;
 		k = 0;
-		while (tetri[j][k] != '\0')
+		while (tetri[j][k])
 		{
 			if (tetri[j][k] == '#')
 				tab[i++] = k;
@@ -62,11 +59,10 @@ int		ft_check_all_3(char **tetri, char *str, int nb_t)
 		}
 		if ((ret = ft_check_shape(tab)) == 0)
 		{
-			printf("\nlol\n");
+			printf("mauvais tetri numero %d\n", j + 1);
 			return (0);
 		}
 		j++;
 	}
-	printf("bonjour");
 	return (1);
 }

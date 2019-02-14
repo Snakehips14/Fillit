@@ -6,7 +6,7 @@
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 18:46:41 by behiraux          #+#    #+#             */
-/*   Updated: 2019/02/07 17:47:29 by behiraux         ###   ########.fr       */
+/*   Updated: 2019/02/14 18:04:05 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int		ft_count_tetri(char *str)
 			nb++;
 		i++;
 	}
-	free(s);
-	printf("nb = %d\n", nb);
+	ft_strdel(&s);
+	printf("nbbb = %d\n", nb);
 	return (nb);
 }
 
@@ -45,15 +45,17 @@ char	**ft_build_tetri(char *str)
 	i = 0;
 	pos = 0;
 	t_nb = ft_count_tetri(str);
-	if (!(tetri = (char **)malloc(sizeof(char *) * t_nb)))
+	if (!(tetri = (char **)ft_memalloc(sizeof(char *) * (t_nb + 1))))
 		return (NULL);
+	tetri[t_nb] = NULL;
 	while (i < t_nb)
 	{
 		tetri[i] = ft_tetri(str, pos);
+		printf("tetri numero %d = \n%s\n\n", i + 1, tetri[i]);
 		pos = pos + 21;
 		i++;
 	}
-	printf("et voila\n");
+	ft_strdel(&str);
 	return (tetri);
 }
 
@@ -64,7 +66,7 @@ char	*ft_tetri(char *str, int pos)
 	int		i;
 
 	s = ft_strdup(str);
-	if (!(tetri = (char *)malloc(sizeof(char) * 21)))
+	if (!(tetri = (char *)malloc(sizeof(char) * 20)))
 		return (NULL);
 	i = 0;
 	while (s[pos])
