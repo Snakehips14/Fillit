@@ -6,7 +6,7 @@
 #    By: behiraux <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 14:04:26 by behiraux          #+#    #+#              #
-#    Updated: 2019/02/14 16:35:02 by behiraux         ###   ########.fr        #
+#    Updated: 2019/02/21 22:02:02 by behiraux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC = ft_abs.c\
 	  ft_strchr.c\
 	  ft_strclr.c\
 	  ft_strcmp.c\
+	  ft_strcount.c\
 	  ft_strcpy.c\
 	  ft_strdel.c\
 	  ft_strdup.c\

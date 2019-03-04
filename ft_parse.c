@@ -1,154 +1,130 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse.c                                         :+:      :+:    :+:   */
+/*   ft_parse2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/12 17:17:13 by behiraux          #+#    #+#             */
-/*   Updated: 2019/02/14 17:58:21 by behiraux         ###   ########.fr       */
+/*   Created: 2019/02/21 16:01:22 by behiraux          #+#    #+#             */
+/*   Updated: 2019/03/04 15:04:06 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		ft_pos_max_left(char *tetri)
+static int	ft_pos_max_left(char *tetri)
 {
-	int		i;
-	int		y;
-	int		pos;
-	int		diese;
+	int i;
+	int pos;
+	int diese;
 
 	i = 0;
-	y = 0;
-	pos = 30;
+	pos = 10;
 	diese = 0;
 	while (tetri[i])
 	{
 		if (tetri[i] == '#')
 		{
 			diese++;
-			if (y < pos)
-				pos = y;
+			if (i % 4 < pos)
+				pos = i % 4;
 			if (diese == 4)
 				return (pos);
 		}
 		i++;
-		y++;
-		if (tetri[i] == '\n')
-			y = -1;
 	}
 	return (pos);
 }
 
-int		ft_compare(char *tetri)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (tetri[i] != '#')
-	{
-		if (tetri[i] == '\n')
-			j = -1;
-		j++;
-		i++;
-	}
-	return (j);
-}
-
-char	*ft_tetri_2d(char *tetri, int pos, int j)
-{
-	char	*tetri_2d;
-	int		i;
-	int		x;
-
-	i = ft_idxof(tetri, '#');
-	x = 0;
-	if (!(tetri_2d = (char *)malloc(sizeof(char) * 14)))
-		return (NULL);
-	while (j-- > pos)
-		tetri_2d[x++] = '.';
-	while (x < 13)
-	{
-		while (tetri[i] && x < 13)
-		{
-			if (tetri[i] == '#' || tetri[i] == '.')
-				tetri_2d[x++] = tetri[i++];
-			else
-				i++;
-		}
-		if (x < 13)
-			tetri_2d[x++] = '.';
-	}
-	tetri_2d[x] = '\0';
-	return (tetri_2d);
-}
-
-char	*ft_tetri_letter(char *tetri_2d, char c)
+static int	ft_pos_max_right(char *tetri)
 {
 	int i;
+	int pos;
+	int diese;
 
 	i = 0;
-	while (tetri_2d[i])
+	pos = 0;
+	diese = 0;
+	while (tetri[i])
 	{
-		if (tetri_2d[i] == '#')
-			tetri_2d[i] = c;
+		if (tetri[i] == '#')
+		{
+			diese++;
+			if (i % 4 > pos)
+				pos = i % 4;
+			if (diese == 4)
+				return (pos);
+		}
 		i++;
 	}
-	return (tetri_2d);
+	return (pos);
 }
 
-char	**ft_parse(char **tetri, int nb_t)
+static char	*ft_tetri_3d(char *tetri, int pos_left)
 {
+	char	*tetri_3d;
 	int		i;
 	int		j;
-	int		pos;
-	char	**final_tetri;
-	char	c;
+	int		x;
+	int		diese;
 
 	i = 0;
-	c = 'A';
-	if (!(final_tetri = (char **)ft_memalloc(sizeof(char *) * (nb_t + 1))))
+	j = ft_idxof(tetri, '#');
+	x = j;
+	diese = 0;
+	if (!(tetri_3d = (char *)ft_strnew(sizeof(char) * 8)))
+		return (NULL);
+	while (j-- % 4 > pos_left)
+		tetri_3d[i++] = '.';
+	return (tetri_3d);
+}
+
+static char	*ft_tetri_3d2(char *tetri, char *tetri_3d, int pos_l, int pos_r)
+{
+	int i;
+	int j;
+	int x;
+
+	i = 0;
+	x = ft_idxof(tetri, '#');
+	while (tetri_3d[i] == '.')
+		i++;
+	j = x % 4;
+	while (i < 8)
+	{
+		while (j++ <= pos_r)
+		{
+			tetri_3d[i++] = tetri[x++];
+			if (ft_strcount(tetri_3d, '#') == 4)
+				return (tetri_3d);
+		}
+		while (x % 4 != pos_l)
+			x++;
+		j = pos_l;
+		tetri_3d[i++] = '\n';
+	}
+	return (tetri_3d);
+}
+
+char		**ft_parse(char **tetri, int nb_t)
+{
+	int		left;
+	int		right;
+	int		i;
+	char	**final_tetri;
+
+	i = 0;
+	if (!(final_tetri = (char **)malloc(sizeof(char *) * (nb_t + 1))))
 		return (NULL);
 	while (tetri[i] != 0)
 	{
-		j = ft_compare(tetri[i]);
-		pos = ft_pos_max_left(tetri[i]);
-		final_tetri[i] = ft_tetri_2d(tetri[i], pos, j);
-		final_tetri[i] = ft_tetri_letter(final_tetri[i], c);
-		c++;
+		left = ft_pos_max_left(tetri[i]);
+		right = ft_pos_max_right(tetri[i]);
+		final_tetri[i] = ft_tetri_3d(tetri[i], left);
+		final_tetri[i] = ft_tetri_3d2(tetri[i], final_tetri[i], left, right);
 		i++;
 	}
 	final_tetri[i] = 0;
 	ft_deltab(tetri);
 	return (final_tetri);
 }
-
-/*int		main(void)
-{
-	char	*tetri_2d;
-	int		pos;
-	int		j;
-	char	*str = "....\n##..\n.##.\n....";
-	char	*str2 = "..#.\n..#.\n..#.\n..#.";
-	char	*str3 = "....\n....\n####\n....";
-	char	*str4 = "....\n.##.\n.##.\n....";
-	char	*str5 = "....\n....\n.###\n...#";
-	char	*str6 = "....\n.###\n..#.\n....";
-	char	*str7 = ".##.\n##..\n....\n....";
-	char	*str8 = "..#.\n.###\n....\n....";
-	char	*str9 = "....\n....\n....\n####";
-
-	j = ft_compare(str7);
-	pos = ft_pos_max_left(str7);
-	printf("pos = %d\n", pos);
-	tetri_2d = ft_tetri_2d(str7, pos, j);
-	printf("tetri = %s\n", tetri_2d);
-	tetri_2d = ft_tetri_letter(tetri_2d, 'A');
-	printf("tetri = %s\n", tetri_2d);
-
-
-	return (0);
-}*/

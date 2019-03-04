@@ -6,76 +6,67 @@
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 17:37:50 by behiraux          #+#    #+#             */
-/*   Updated: 2019/02/14 17:47:13 by behiraux         ###   ########.fr       */
+/*   Updated: 2019/03/04 14:42:07 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		ft_sqrtmap(int nb_t)
+static int	ft_sqrtmap(int x)
 {
 	int i;
 
 	i = 2;
-	nb_t = nb_t * 4;
-	while (i * i < nb_t)
+	while (i * i < x)
 		i++;
 	return (i);
 }
 
-char	**ft_map(int nb_t)
+static char	*ft_map_size(int x)
 {
-	int		x;
-	int		y;
+	int		i;
+	int		p;
 	int		size;
-	char	**map;
+	char	*map;
 
-	x = 0;
-	y = 0;
-	size = ft_sqrtmap(nb_t);
-	if (!(map = (char **)malloc(sizeof(char *) * size)))
+	size = x * x + x;
+	i = 0;
+	p = 1;
+	if (!(map = (char *)ft_memalloc(sizeof(char) * (size))))
 		return (NULL);
-	while (x < size)
+	while (i < size - 1)
 	{
-		if (!(map[x] = (char *)malloc(sizeof(char *) * (size + 1))))
-			return (NULL);
-		x++;
+		if (p % (x + 1) == 0)
+			map[i] = '\n';
+		else
+			map[i] = '.';
+		i++;
+		p++;
 	}
-	x = 0;
-	while (x < size)
-	{
-		y = 0;
-		while (y < size)
-			map[x][y++] = '.';
-		map[x][y] = '\0';
-		x++;
-	}
+	map[i] = '\0';
 	return (map);
 }
 
-char	**ft_expand_map(char **map, int size)
+char		*ft_map(int nb_t, char **tetri)
 {
-	int x;
-	int y;
+	int		x;
+	int		size;
+	int		i;
+	char	*map;
+	int		len;
 
-	x = 0;
-	y = 0;
-	if (!(map = (char **)malloc(sizeof(char *) * size)))
+	size = nb_t * 4;
+	x = ft_sqrtmap(size);
+	i = 0;
+	if ((map = ft_map_size(x)) == NULL)
 		return (NULL);
-	while (x < size)
+	len = ft_strlen(map);
+	while (ft_solver(tetri, map, len, 0) == 0)
 	{
-		if (!(map[x] = (char *)malloc(sizeof(char) * (size + 1))))
-			return (NULL);
+		free(map);
 		x++;
+		map = ft_map_size(x);
+		len = ft_strlen(map);
 	}
-	x = 0;
-	while (x < size)
-	{
-		y = 0;
-		while (y < size)
-			map[x][y++] = '.';
-		map[x][y] = '\0';
-		x++;
-	}
-	return (map);	
+	return (map);
 }

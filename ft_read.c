@@ -6,15 +6,13 @@
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:29:24 by behiraux          #+#    #+#             */
-/*   Updated: 2019/02/13 16:34:20 by behiraux         ###   ########.fr       */
+/*   Updated: 2019/03/04 14:20:46 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-// fonction qui renvoie la taille de l'input et verifie s'il n y a pas plu de 26
-// tetriminos.
-int		ft_input_len(char *input)
+static int	ft_input_len(char *input)
 {
 	int		len;
 	int		fd;
@@ -30,13 +28,12 @@ int		ft_input_len(char *input)
 			return (-1);
 		len++;
 	}
-	if (len > 545)
+	if (len > 545 || len < 20 || len % 21 != 20)
 		return (-1);
 	return (len);
 }
 
-// alloue a new la taille de l'input, et assigne son contenu, puis renvoie new
-char	*ft_give_input(char *input)
+static char	*ft_give_input(char *input)
 {
 	int		fd;
 	int		len;
@@ -49,7 +46,8 @@ char	*ft_give_input(char *input)
 	len = ft_input_len(input);
 	if (len == -1)
 		return (NULL);
-	new = ft_strnew(len);
+	if (!(new = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
 	while (read(fd, &buf, 1) != '\0')
 	{
 		new[i] = buf;
@@ -61,7 +59,7 @@ char	*ft_give_input(char *input)
 	return (new);
 }
 
-char	*ft_check_all(char *file)
+char		*ft_read(char *file)
 {
 	char	*str;
 

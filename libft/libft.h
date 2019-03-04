@@ -6,7 +6,7 @@
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 12:31:23 by behiraux          #+#    #+#             */
-/*   Updated: 2019/02/14 16:34:23 by behiraux         ###   ########.fr       */
+/*   Updated: 2019/02/21 22:03:08 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char				*ft_strcat(char *dest, const char *src);
 char				*ft_strchr(const char *s, int c);
 void				ft_strclr(char *s);
 int					ft_strcmp(const char *s1, const char *s2);
+int					ft_strcount(char *str, char c);
 char				*ft_strcpy(char *dest, const char *src);
 void				ft_strdel(char **as);
 char				*ft_strdup(const char *s);

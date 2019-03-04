@@ -6,11 +6,11 @@
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:24:58 by behiraux          #+#    #+#             */
-/*   Updated: 2019/02/14 18:02:38 by behiraux         ###   ########.fr       */
+/*   Updated: 2019/02/18 17:56:47 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "libft.h"
 
 void	ft_deltab(char **tab)
 {
@@ -24,5 +24,5 @@ void	ft_deltab(char **tab)
 		free(tab[i]);
 		i++;
 	}
-	free (tab);
+	free(tab);
 }
