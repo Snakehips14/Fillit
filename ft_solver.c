@@ -6,7 +6,7 @@
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 19:09:48 by behiraux          #+#    #+#             */
-/*   Updated: 2019/03/04 15:07:54 by behiraux         ###   ########.fr       */
+/*   Updated: 2019/03/14 17:46:31 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static int	ft_isok(char *tetrimino, char *map, int pos, char c)
 	x = ft_idxof(tetrimino, '\n') - 1;
 	begin = pos;
 	map_size = ft_idxof(map, '\n');
-	while (tetrimino[i] != '\0')
+	while (tetrimino[i])
 	{
 		if (tetrimino[i] == '.')
 			pos++;
 		else if (tetrimino[i] == '#')
 		{
-			if (map[pos] != '.')
+			if ((size_t)pos > ft_strlen(map) || map[pos] != '.')
 				return (0);
 			pos++;
 		}

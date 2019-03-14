@@ -6,7 +6,7 @@
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 16:01:22 by behiraux          #+#    #+#             */
-/*   Updated: 2019/03/04 15:04:06 by behiraux         ###   ########.fr       */
+/*   Updated: 2019/03/14 16:44:12 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,9 @@ static char	*ft_tetri_3d(char *tetri, int pos_left)
 	char	*tetri_3d;
 	int		i;
 	int		j;
-	int		x;
-	int		diese;
 
 	i = 0;
 	j = ft_idxof(tetri, '#');
-	x = j;
-	diese = 0;
 	if (!(tetri_3d = (char *)ft_strnew(sizeof(char) * 8)))
 		return (NULL);
 	while (j-- % 4 > pos_left)

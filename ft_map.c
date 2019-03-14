@@ -6,7 +6,7 @@
 /*   By: behiraux <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 17:37:50 by behiraux          #+#    #+#             */
-/*   Updated: 2019/03/04 14:42:07 by behiraux         ###   ########.fr       */
+/*   Updated: 2019/03/14 16:48:54 by behiraux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*ft_map_size(int x)
 	size = x * x + x;
 	i = 0;
 	p = 1;
-	if (!(map = (char *)ft_memalloc(sizeof(char) * (size))))
+	if (!(map = (char *)malloc(sizeof(char) * (size))))
 		return (NULL);
 	while (i < size - 1)
 	{
